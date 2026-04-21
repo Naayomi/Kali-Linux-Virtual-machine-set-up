@@ -1,5 +1,3 @@
-# Kali-Linux-Virtual-machine-set-up
-A step-by-step documentation of setting up a Kali Linux Virtual Machine on Windows using VirtualBox.
 
 # Kali Linux Environment Setup & Troubleshooting
 
@@ -22,3 +20,31 @@ A documented setup of a Kali Linux laboratory environment using VirtualBox 7.0. 
 
 ## 📸 Lab Evidence
 *(Images to be uploaded to the /images folder)*
+
+## Implementation Walkthrough
+1. Environment Virtualization
+The first step was to create a "computer within a computer." I used Oracle VirtualBox 7.0 to act as a Hypervisor. This allowed me to allocate a specific portion of my laptop's physical hardware (RAM and Processor cores) to an isolated guest environment.
+
+2. Operating System Deployment
+I deployed Kali Linux, a specialized, Debian-based operating system used for security auditing.
+
+The Challenge: The source files were provided as a Virtual Disk Image (.vdi) rather than a standard one-click installer.
+
+The Action: I manually constructed the virtual hardware profile and "hooked" the digital hard drive into the system's virtual SATA controller.
+
+3. System Boot Configuration
+Newer virtualization software often attempts to start a system using a modern "language" called EFI. However, the specific version of Kali I used required a legacy boot method.
+
+The Action: I accessed the virtual motherboard settings and disabled the EFI option. This allowed the system to recognize the boot files and start the operating system successfully.
+
+4. Isolated Network Architecture
+To ensure a safe environment, I configured two distinct network pathways (Adapters):
+
+Internet Pathway (NAT): This allows the VM to reach the internet to download security updates without exposing the rest of my home network.
+
+Internal Laboratory Pathway (Host-Only): I created a private, digital "cable" between my physical laptop and the virtual machine. This ensures that any security tests I run remain trapped within this private link and never leak onto the real internet.
+
+5. System Hardening & Identity Migration
+Standard installations come with "factory default" usernames and passwords, which is a significant security risk.
+
+The Action: I performed a system-wide update to patch all software. I then used administrative commands to migrate the entire user profile from the default "kali" account to a custom identity, Naayomi. This included renaming the home directories and updating group permissions to ensure full administrative control was tied to a unique, secure identity.

@@ -1,0 +1,10 @@
+# VirtualBox
+*.log
+*-prev
+*.vbox-prev
+*.vmdk.lck
+
+# System Junk
+.DS_Store
+Thumbs.db
+Desktop.ini
